@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),{Switcher,numberOf}=require('../desktop/spectator-switch.cjs');
+const s={epoch:'e',phase:'live',observerRole:'Overwatch',wave:3,observedActorId:'a1',players:Array.from({length:9},(_,i)=>({id:i<6?'H0'+(i+1):'S0'+(i-5),actorId:'a'+(i+1),lifeId:1,alive:true})),order:['H02','H01','H03','H04','H05','H06','S03','S02','S01']};
+assert.equal(numberOf(s.players[8],s),7);assert.equal(numberOf(s.players[6],s),9);assert.equal(numberOf(s.players[1],s),1);
+let inputs=[],results=[];const sw=new Switcher({step:(...args)=>inputs.push(args),report:r=>results.push(r)});
+sw.start(7,s);assert.equal(sw.job.actor,'a9','key 7 selects the leftmost SCP position, not S01');
+s.order=['H02','H01','H03','H04','H05','H06','S02','S03','S01'];sw.update(s);assert.equal(sw.job,null);assert.equal(results.at(-1).ok,false,'stop when the chosen screen position changes occupant');
+s.players[7].dead=true;sw.start(7,s);assert.equal(sw.job,null);assert.equal(numberOf(s.players[8],s),8,'death does not compact physical positions');
+s.players[7]={...s.players[7],actorId:'new-player',lifeId:2,dead:false};sw.start(7,s);assert.equal(sw.job.actor,'new-player','a replacement inherits the physical key');
+sw.cancel('done');sw.syncRoute(s);sw.learn('a1','a2',1);sw.learn('a2','a3',1);s.players[8].lifeId++;sw.update(s);assert.equal(sw.route('a1','a3').length,2,'unrelated respawn retains known paths');
+sw.cancel('manual navigation');assert.equal(sw.route('a1','a3').length,2);s.epoch='new-round';sw.update(s);assert.equal(sw.routes.size,0);
+console.log('PASS physical positions, death vacancy, replacement, in-flight reorder cancellation, retained unrelated/manual paths, round invalidation');

@@ -1,0 +1,9 @@
+enabled: true
+listen_address: '0.0.0.0'
+port: 28480
+updates_per_second: 20
+certificate_path: ''
+certificate_password: ''
+automatic_scores: true
+# Local bot testing only; leave false on the tournament server.
+include_dummy_players: false

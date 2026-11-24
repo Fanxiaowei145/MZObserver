@@ -1,0 +1,21 @@
+from pathlib import Path
+p=Path('ui/check-map-landmarks.cjs');s=p.read_text(encoding='utf-8-sig').replace('MZ_MAP.rooms,6','MZ_MAP.rooms,2').replace('MZ_LIGHT_MAP.rooms,4','MZ_LIGHT_MAP.rooms,2').replace('MZ_ALTERNATE_MAP.HCZ_EZ,6','MZ_ALTERNATE_MAP.HCZ_EZ,2').replace('MZ_ALTERNATE_MAP.LCZ,4','MZ_ALTERNATE_MAP.LCZ,2')
+s+="\nassert.equal(new Set(api.palette.map(s=>s.color)).size,8);assert.equal(api.classify({name:'LczGlassroom',prefab:'LCZ_372'}).kind,'gr18');assert.equal(api.classify({name:'HczTesla',prefab:'HCZ_Tesla_Rework'}).kind,'tesla');assert.equal(api.classify({name:'HczCheckpointToEntranceZone',prefab:'HCZ_EZ_Checkpoint Part'}),undefined);\n";p.write_text(s,encoding='utf-8')
+p=Path('ui/check-map-camera.cjs');s=p.read_text(encoding='utf-8-sig');s+='''
+const contextFrame=context.singlePlayerMapFrame({...anchor,x:12,y:7},rooms);assert.equal(contextFrame[0].x,-45);assert.equal(contextFrame[1].x,45);assert.equal(contextFrame[0].y,-45);assert.equal(contextFrame[1].y,45);
+const contextView=camera.update(contextFrame,'HCZ_EZ',100,{focus:true,selectionKey:'single'});assert(contextView.scale<5&&contextView.scale>3);
+''';p.write_text(s,encoding='utf-8')
+p=Path('ui/verify-map-review.cjs');s=p.read_text(encoding='utf-8').replace("run(\"elevatorLayer.children.length\"),6", "run(\"elevatorLayer.children.length\"),2").replace("run('elevatorLayer.children.length'),6", "run('elevatorLayer.children.length'),2").replace("run('elevatorLayer.children.length'),4", "run('elevatorLayer.children.length'),2").replace('landmarkCounts:{HCZ_EZ:6,LCZ:4}','elevatorLabelCounts:{HCZ_EZ:2,LCZ:2}')
+idx=s.index(" fs.writeFileSync(path.join(out,'map-review-check.json')")
+s=s[:idx]+''' await run("MZUI.setMapObservedPlayer('H01')");assert.equal(await run("document.querySelectorAll('.card[data-observed=true]').length"),1);assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'true');
+ await run('setScene(3)');assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'true');
+ await run("MZUI.setMapObservedPlayer('S03')");await sleep(180);assert.equal(await run("getComputedStyle(document.querySelector('.card[data-id=S03] .name-row')).backgroundColor"),'rgb(163, 190, 169)');assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'false');
+ await run("document.getElementById('single-room-demo').click()");await run('uiReady()');await sleep(350);
+ assert.equal(await run('mapCamera.focusKind'),'single-room-context');assert.deepEqual(await run('mapCamera.visibleIds'),['H02']);const singlePlayerScale=await run('mapCamera.scale');assert(singlePlayerScale<5&&singlePlayerScale>3);
+ assert.equal(await run("document.querySelectorAll('.room-landmark').length"),0);assert.equal(await run("document.querySelectorAll('#elevators svg').length"),0);
+ fs.writeFileSync(path.join(out,'19-single-player-context.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("MZUI.setMapZoom(false);setScene(1)");await sleep(350);fs.writeFileSync(path.join(out,'17-room-colors-heavy.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ const coloredHeavy=await run("[...document.querySelectorAll('.room[data-color]')].map(e=>({kind:e.dataset.kind,color:e.dataset.color,filter:e.style.filter}))");assert(coloredHeavy.some(r=>r.kind==='tesla'));assert(coloredHeavy.every(r=>r.filter.includes('room-color-')));
+ await run("previewMapPlane('LCZ',{animate:false})");await run('uiReady()');await sleep(350);fs.writeFileSync(path.join(out,'18-room-colors-light.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());assert.equal(await run("document.querySelectorAll('.room[data-kind=gr18]').length"),1);
+ await run("setScene(1);MZUI.setMapObservedPlayer('H02')");await sleep(350);fs.writeFileSync(path.join(out,'20-observed-name.png'),(await win.webContents.capturePage({x:20,y:870,width:890,height:195})).toPNG());
+'''+s[idx:];s=s.replace('continuousMovement:true,singleRoomScale,twoRoomScale', 'continuousMovement:true,singleRoomScale,twoRoomScale,singlePlayerScale,observedHighlight:true,coloredRooms:true,onlyElevatorText:true');p.write_text(s,encoding='utf-8')

@@ -1,0 +1,52 @@
+const {app,BrowserWindow}=require('electron'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const out=path.resolve(__dirname,'../output'),sleep=ms=>new Promise(r=>setTimeout(r,ms));app.commandLine.appendSwitch('force-device-scale-factor','1');
+app.whenReady().then(async()=>{
+ const win=new BrowserWindow({width:1920,height:1080,show:false,useContentSize:true,webPreferences:{offscreen:true,backgroundThrottling:false}});
+ const run=async s=>{try{return await win.webContents.executeJavaScript(s)}catch(e){throw Error(s+'\n'+e.message)}};
+ await win.loadFile(process.argv.includes('--offline')?path.join(out,'MZ观战UI_统一预览.html'):path.join(__dirname,'index.html'),{query:{export:'1'}});assert.deepEqual((await run('uiReady()')).missing,[]);await sleep(500);
+ assert.equal(await run('mapZoomEnabled'),false);
+ const original=await run('mapCamera.scale');assert.equal(await run("elevatorLayer.children.length"),2);
+ assert(Math.abs(await run("parseFloat(getComputedStyle(document.getElementById('radar')).width)")-472.5)<.1);
+ assert(Math.abs(await run("parseFloat(getComputedStyle(document.querySelector('.marker')).width)")-22)<.05);
+ fs.writeFileSync(path.join(out,'13-map-full.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("document.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyB',bubbles:true}))");assert.equal(await run('mapZoomEnabled'),true);
+ await run("document.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyB',repeat:true,bubbles:true}))");assert.equal(await run('mapZoomEnabled'),true);
+ await run("(()=>{const r=mapRoomSets.HCZ_EZ.find(r=>r.name==='HczMicroHID');window.clusterPoints=currentSnapshot.map((p,i)=>({...p,x:r.x*2+(i%3)*7,y:-r.z*2+Math.floor(i/3)*7,plane:'HCZ_EZ'}));fitMapPlayers(clusterPoints,'HCZ_EZ')})()");
+ const close=await run('mapCamera.scale');assert(close>7.5&&close>original*3);await sleep(350);
+ fs.writeFileSync(path.join(out,'14-map-close.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("fitMapPlayers(clusterPoints.map(p=>({...p,x:clusterPoints[0].x+(p.x-clusterPoints[0].x)/2,y:clusterPoints[0].y+(p.y-clusterPoints[0].y)/2})),'HCZ_EZ')");
+ const tighter=await run('mapCamera.scale');assert(tighter>close*1.8);
+ await run("fitMapPlayers(clusterPoints.map(p=>({...p,role:'scientist'})),'HCZ_EZ')");assert(Math.abs((await run('mapCamera.scale'))-close)<.01);
+
+ await run("document.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyB',bubbles:true}))");assert.equal(await run('mapZoomEnabled'),false);assert.equal(await run('mapCamera.scale'),original);
+ await run("document.getElementById('map-template').click()");assert.equal(await run('mapRoomSets.HCZ_EZ.length'),75);assert.equal(await run('elevatorLayer.children.length'),2);await run('uiReady()');await sleep(350);
+ fs.writeFileSync(path.join(out,'15-map-alternate.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("previewMapPlane('LCZ',{animate:false})");assert.equal(await run('elevatorLayer.children.length'),2);assert.equal(await run("document.querySelectorAll('[data-kind=scp914]').length"),1);await sleep(350);
+ fs.writeFileSync(path.join(out,'16-map-light.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("setScene(1);MZUI.applyPlayers(currentSnapshot.map(p=>p.id==='H01'?{...p,inventory:[{type:'SCP2176',count:1}],special:[['SCP500','×1']],effects:['invisible'],colaSpeed:true,colaStacks:1}:p))");await sleep(250);
+ assert.equal(await run("document.querySelector('.card[data-id=H01] .specials').textContent"),'');assert.equal(await run("document.querySelector('.card[data-id=H01] .status-count')"),null);
+ assert.equal(await run("+getComputedStyle(document.querySelector('.card[data-id=H01] .portrait')).opacity"),.5);
+ await run("MZUI.applyPlayers(currentSnapshot.map(p=>p.id==='H01'?{...p,inventory:[{type:'SCP2176',count:2}],colaStacks:2}:p))");assert.equal(await run("document.querySelector('.card[data-id=H01] .specials').textContent"),'×2');
+ const sizes=[];
+ for(const [width,height] of [[1280,720],[1440,1080],[2560,1080],[1920,1080]]){
+  win.setContentSize(width,height);await sleep(250);
+  const geometry=await run("(()=>{const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}};return {stage:box('#stage'),humans:box('#humans'),scps:box('#scps'),score:box('#score'),radar:box('#radar')}})()");
+  assert(Math.abs(geometry.stage.width-width)<1);assert(Math.abs(geometry.stage.height-height)<1);assert(Math.abs((geometry.score.left+geometry.score.right)/2-width/2)<1);assert(geometry.humans.left>=0&&geometry.scps.right<=width);assert(geometry.humans.right<geometry.scps.left);assert(geometry.radar.bottom<geometry.humans.top);sizes.push({width,height});
+ }
+ await run("MZUI.setMapZoom(true);document.getElementById('map-movement').click()");await sleep(100);const before=await run('mapLastPlayers.map(p=>({x:p.x,y:p.y}))');await sleep(180);const after=await run('mapLastPlayers.map(p=>({x:p.x,y:p.y}))');assert(before.some((p,i)=>Math.hypot(p.x-after[i].x,p.y-after[i].y)>0));assert(before.every((p,i)=>Math.hypot(p.x-after[i].x,p.y-after[i].y)<15));await run('stopMapMovementDemo()');
+ const transitions=await run("(()=>{const paths=movementPaths();return [8,11,14,17,25,26].map(t=>{const a=sampleMapMovement(paths,t-.00001),b=sampleMapMovement(paths,t+.00001);return Math.max(...a.map((p,i)=>Math.hypot(p.x-b[i].x,p.y-b[i].y)))})})()");assert(transitions.every(d=>d<.01));
+ await run("fitMapPlayers(sampleMapMovement(movementPaths(),11),'HCZ_EZ')");const singleRoomScale=await run('mapCamera.scale');
+ await run("fitMapPlayers(sampleMapMovement(movementPaths(),8),'HCZ_EZ')");const twoRoomScale=await run('mapCamera.scale');assert(singleRoomScale>twoRoomScale*1.5);
+ await run("MZUI.setMapObservedPlayer('H01')");assert.equal(await run("document.querySelectorAll('.card[data-observed=true]').length"),1);assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'true');
+ await run('setScene(3)');assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'true');
+ await run("MZUI.setMapObservedPlayer('S03')");await sleep(180);assert.equal(await run("getComputedStyle(document.querySelector('.card[data-id=S03] .name-row')).backgroundColor"),'rgb(37, 207, 90)');assert.equal(await run("document.querySelector('.card[data-id=H01]').dataset.observed"),'false');
+ await run("document.getElementById('single-room-demo').click()");await run('uiReady()');await sleep(350);
+ assert.equal(await run('mapCamera.focusKind'),'single-room-context');assert.deepEqual(await run('mapCamera.visibleIds'),['H02']);const singlePlayerScale=await run('mapCamera.scale');assert(singlePlayerScale<5&&singlePlayerScale>3);
+ assert.equal(await run("document.querySelectorAll('.room-landmark').length"),0);assert.equal(await run("document.querySelectorAll('#elevators svg').length"),0);
+ fs.writeFileSync(path.join(out,'19-single-player-context.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ await run("MZUI.setMapZoom(false);setScene(1)");await sleep(350);fs.writeFileSync(path.join(out,'17-room-colors-heavy.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());
+ const coloredHeavy=await run("[...document.querySelectorAll('.room[data-color]')].map(e=>({kind:e.dataset.kind,color:e.dataset.color,filter:e.style.filter}))");assert(coloredHeavy.some(r=>r.kind==='tesla'));assert(coloredHeavy.every(r=>r.filter.includes('room-color-')));
+ await run("previewMapPlane('LCZ',{animate:false})");await run('uiReady()');await sleep(350);fs.writeFileSync(path.join(out,'18-room-colors-light.png'),(await win.webContents.capturePage({x:20,y:20,width:490,height:460})).toPNG());assert.equal(await run("document.querySelectorAll('.room[data-kind=gr18]').length"),1);
+ await run("setScene(1);MZUI.setMapObservedPlayer('H02')");await sleep(350);fs.writeFileSync(path.join(out,'20-observed-name.png'),(await win.webContents.capturePage({x:20,y:870,width:890,height:195})).toPNG());
+ fs.writeFileSync(path.join(out,'map-review-check.json'),JSON.stringify({passed:true,defaultFullMap:true,keyB:true,repeatIgnored:true,closeScale:close,tighterScale:tighter,noEnemyRequired:true,fullScale:original,mapSize:[472.5,437.5],markerSize:22,twoTemplates:true,elevatorLabelCounts:{HCZ_EZ:2,LCZ:2},invisiblePortraitOpacity:.5,noX1:true,ghostX2:true,resolutions:sizes,continuousMovement:true,singleRoomScale,twoRoomScale,singlePlayerScale,observedHighlight:true,coloredRooms:true,onlyElevatorText:true},null,2));fs.rmSync(path.join(out,'map-review-error.txt'),{force:true});win.destroy();app.quit();
+}).catch(e=>{fs.writeFileSync(path.join(out,'map-review-error.txt'),e.stack);app.exit(1)});

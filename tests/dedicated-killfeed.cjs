@@ -1,0 +1,27 @@
+const {app,BrowserWindow}=require('electron'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const root=path.resolve(__dirname,'..'),WebSocket=require(path.join(root,'desktop/node_modules/ws')),out=path.join(root,'output/tests'),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const command=s=>fs.appendFileSync(path.join(root,'output/dedicated/commands.txt'),s+'\n');
+app.setPath('userData',path.join(out,'electron-combat-profile'));app.commandLine.appendSwitch('force-device-scale-factor','1');
+app.whenReady().then(async()=>{
+ const errors=[],w=new BrowserWindow({width:1920,height:1080,show:false,webPreferences:{offscreen:true,backgroundThrottling:false}}),run=s=>w.webContents.executeJavaScript(s);
+ w.webContents.on('console-message',(_e,l,m)=>{if(l>=3)errors.push(m)});
+ await w.loadFile(path.join(root,'ui/index.html'),{query:{live:'1'}});await run('uiReady()');
+ command('mzcombattest prepare');await sleep(1000);
+ const {code}=JSON.parse(fs.readFileSync('C:/MZLocalTest/combat-pair.json','utf8'));assert(/^\d{4}$/.test(code));
+ const ws=new WebSocket('ws://127.0.0.1:28481/mz');let authenticated=false,last=null,latestEvent=null,layouts=0,states=0,wantedAfter=Infinity;let chain=Promise.resolve();
+ ws.on('open',()=>ws.send(JSON.stringify({code})));
+ ws.on('message',raw=>{const s=JSON.parse(raw);if(s.type==='authenticated'){authenticated=true;return;}if(s.type==='layout')layouts++;if(s.type==='state'){states++;last=s;if(s.killfeed?.some(e=>e.id>wantedAfter))latestEvent=s;}if(s.type==='state'||s.type==='layout')chain=chain.then(()=>run('MZLive.accept('+JSON.stringify(s)+')'));});
+ for(let i=0;i<100&&(!authenticated||!last||last.phase!=='live');i++)await sleep(100);
+ assert(authenticated&&last?.phase==='live'&&layouts>0);assert.equal(last.players.length,9);await chain;
+ wantedAfter=last.killfeed?.at(-1)?.id||0;await run('MZKillfeed.clear()');command('mzcombattest emit');for(let i=0;i<60&&!latestEvent;i++)await sleep(100);assert(latestEvent,'real event received over WebSocket');await chain;
+ const e=latestEvent.killfeed.at(-1);assert.equal(e.icon,'049-touch');assert.deepEqual(e.assists[0].icons,['939-claw']);
+ assert.equal(await run('MZKillfeed.count'),1);assert.deepEqual(await run("[...document.querySelectorAll('#killfeed .kf-assistant .kf-name')].map(e=>e.textContent)"),[e.assists[0].name]);
+ await sleep(350);await chain;assert.equal(await run("getComputedStyle(document.querySelector('#killfeed .kf-row')).opacity"),'1');
+ fs.writeFileSync(path.join(out,'dedicated-killfeed.png'),(await w.webContents.capturePage()).toPNG());
+ fs.writeFileSync(path.join(out,'dedicated-live-event.json'),JSON.stringify(latestEvent,null,2));
+ await sleep(800);await chain;assert.equal(await run('MZKillfeed.count'),1,'repeated snapshots do not duplicate');
+ await sleep(5600);await chain;assert.equal(await run('MZKillfeed.count'),0,'expires after server event age 6s');
+ await run(`MZKillfeed.accept(${JSON.stringify({...latestEvent,serverTimeMs:latestEvent.serverTimeMs+9000})})`);assert.equal(await run('MZKillfeed.count'),0,'reconnect snapshot cannot revive old event');
+ assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'dedicated-killfeed-report.json'),JSON.stringify({ok:true,authenticated,states,layouts,checks:['real dedicated server four-digit pairing','6+3 live snapshots','real damage/death to WebSocket','correct killer and SCP assist icon','live renderer placement','deduplicated snapshots','six-second expiry','old event not replayed'],errors},null,2));
+ ws.close();w.destroy();app.quit();
+}).catch(e=>{console.error(e);fs.writeFileSync(path.join(out,'dedicated-killfeed-error.txt'),e.stack);app.exit(1)});

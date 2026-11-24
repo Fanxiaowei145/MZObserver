@@ -1,0 +1,18 @@
+.portrait[data-art="1507_Icon"] img{clip-path:polygon(53% 7%,65% 10%,70% 17%,71% 22%,88% 32%,95% 43%,94% 49%,90% 42%,73% 34%,62% 29%,51% 34%,39% 34%,28% 36%,24% 47%,22% 63%,24% 83%,31% 100%,18% 96%,14% 84%,12% 65%,14% 43%,21% 26%,32% 14%,43% 9%)}
+.card[data-role="079"] .portrait{width:95px}
+.card[data-role="079"] .portrait img{width:122px;left:-5px;top:-36px}
+.portrait[data-art="1507_Icon"]{width:84px}
+.portrait[data-art="1507_Icon"] img{width:130px;left:-25px;top:-4px}
+.card[data-role="079"] .hs{color:#bce9ff;font-size:15px;white-space:nowrap}
+#controls{max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:flex-end}
+#controls select{color:#fff;background:#263348;border:1px solid #ffffff22;padding:5px;font:inherit;max-width:225px}
+.gallery-open #stage,.gallery-open #controls{visibility:hidden}
+#scp-gallery{position:absolute;inset:0;overflow:auto;background:#141b24;padding:22px 24px;z-index:50}
+#scp-gallery header{display:flex;align-items:center;gap:18px;margin-bottom:30px;font-size:20px}
+#scp-gallery header span{font-size:13px;color:#aab5c7}
+#scp-gallery button{margin-left:auto;background:#263348;color:#fff;border:0;padding:8px 12px;border-radius:3px}
+.scp-grid{display:grid;grid-template-columns:repeat(9,140px);gap:30px 17px;width:max-content;margin:auto}
+.scp-cell{width:140px;position:relative;padding-top:3px}
+.scp-label{text-align:center;color:#d4ddeb;font-weight:bold;font-size:13px;margin-bottom:7px}
+.scp-cell .card{height:188px}
+.scp-caption{color:#adb8ca;font-size:11px;text-align:center;margin-top:6px}

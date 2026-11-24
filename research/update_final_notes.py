@@ -1,0 +1,8 @@
+from pathlib import Path
+p=Path('ui/item-icons.js');s=p.read_text(encoding='utf-8-sig').replace('let itemIconSerial=0;\n','').replace("ammo:MZ_ITEMS[item].wide&&item!=='Jailbird'?24:null,magazineCapacity:MZ_ITEMS[item].wide&&item!=='Jailbird'?30:null", "ammo:item.startsWith('Gun')?24:item==='ParticleDisruptor'?5:item==='MicroHID'?'62%':null,magazineCapacity:item.startsWith('Gun')?30:item==='ParticleDisruptor'?5:null");p.write_text(s,encoding='utf8')
+p=Path('预览说明.md');s=p.read_text(encoding='utf-8-sig');s=s.replace('其他枪型角度需要逐一按原图补充，不能认为全部枪型均已适配。','现已补充本机物品目录内所有枪型的白色水平轮廓。')
+s=s.replace('当前预览没有完成所有物品类型的素材映射（包括钥匙卡），不能把未映射的素材宣称已与游戏一致。','当前覆盖本机版本 69 种物品条目（含弹药、护甲与活动物品），不含 None 和开发者 DebugRagdollMover 工具；不等同于未来版本物品目录。')
+s=s.replace('预览以蓝色电量块的高度表示 Energy/MaxEnergy，配 `Lv.N`、固定大号剩余电量和小闪电。','079 固定为红色 90 px 色块，主数字 X/3 表示已激活电板数；右侧依次显示等级与蓝色剩余电量，不用能量改变红色色块高度。')
+s+='\n## 统一离线版本与物品修订\n\n打开 `output/MZ观战UI_统一预览.html`，样式、脚本、原图与图标均已内嵌，无须联网。点击“全部物品图标”可查看 69 项，并点选放入 Alpha 的手持栏；目录标签不出现在正式 HUD。枪械使用原版透明轮廓的白色剪影，裁掉留白并按枪型校正角度，实际栏位最大 79×25 px；普通道具 29×25 px。钥匙卡为统一白色卡片，端部用卡种色，支持 heldColor 的实时自定义颜色。空手、阵亡仍无图标。\n\nAHP、HS 数字改为靠右的固定上下两行，HP 固定在下方。所有人物头像保留原始素材，通过显示裁切、旋转、右侧渐隐调整上半身构图。统一版仍是模拟数据预览，不是比赛服部署验收。\n'
+p.write_text(s,encoding='utf8')
+p=Path('assets/SOURCES.md');s=p.read_text(encoding='utf-8-sig');s+='\n物品白色图标：`assets/items/*.svg` 内嵌原始 PNG，使用 alpha 轮廓白化和旋转/裁切，不改动原始 PNG。对应表 `ui/item-data.js` 对照本机 ItemType；69 项不含 DebugRagdollMover 与 None。普通 10 种钥匙卡端色读取 PredefinedTintDetail（`research/keycard-colors.json`）；O5、Chaos、SurfaceAccessPass 及自定义卡初始端色为预览配置，正式接入需从该卡显示组件取得实际颜色（heldColor），不能把这些默认值称为全部原版已核验。钥匙卡统一白色外形按用户要求新绘。\n';p.write_text(s,encoding='utf8')

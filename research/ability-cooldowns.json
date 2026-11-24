@@ -1,0 +1,228 @@
+[
+  {
+    "role": "049",
+    "module": "Scp049AttackAbility",
+    "member": "Cooldown",
+    "id": "049-touch",
+    "texture": "scp_049_cardiac_attack",
+    "label": "心脏骤停",
+    "textureId": 909,
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ]
+  },
+  {
+    "role": "049",
+    "module": "Scp049CallAbility",
+    "member": "Cooldown",
+    "id": "049-call",
+    "texture": "Doctor_Call_Icon",
+    "label": "医生召唤",
+    "textureId": 1235,
+    "crop": [
+      0,
+      37,
+      429,
+      512
+    ]
+  },
+  {
+    "role": "049",
+    "module": "Scp049SenseAbility",
+    "member": "Cooldown",
+    "id": "049-sense",
+    "texture": "Good_Sense_Icon",
+    "label": "良医之感",
+    "textureId": 841,
+    "crop": [
+      25,
+      13,
+      484,
+      512
+    ]
+  },
+  {
+    "role": "096",
+    "module": "Scp096ChargeAbility",
+    "member": "Cooldown",
+    "id": "096-charge",
+    "texture": "096ChargeHud",
+    "label": "冲刺",
+    "textureId": 660,
+    "crop": [
+      6,
+      15,
+      239,
+      247
+    ]
+  },
+  {
+    "role": "096",
+    "module": "Scp096AttackAbility",
+    "member": "_serverAttackCooldown",
+    "id": "096-attack",
+    "texture": "096MeleeHUD",
+    "label": "攻击",
+    "textureId": 1426,
+    "crop": [
+      13,
+      6,
+      242,
+      247
+    ]
+  },
+  {
+    "role": "106",
+    "module": "Scp106SinkholeController",
+    "member": "ReadonlyCooldown",
+    "id": "106-sinkhole",
+    "texture": "sinkhole",
+    "label": "下潜／猎人图谱",
+    "textureId": 871,
+    "crop": [
+      0,
+      127,
+      487,
+      473
+    ]
+  },
+  {
+    "role": "173",
+    "module": "Scp173TantrumAbility",
+    "member": "Cooldown",
+    "id": "173-tantrum",
+    "texture": "tantrumcircle",
+    "label": "污秽之物",
+    "textureId": 1511,
+    "crop": [
+      51,
+      10,
+      237,
+      246
+    ]
+  },
+  {
+    "role": "173",
+    "module": "Scp173BreakneckSpeedsAbility",
+    "member": "Cooldown",
+    "id": "173-breakneck",
+    "texture": "breakneckcircle",
+    "label": "高速移动",
+    "textureId": 1554,
+    "crop": [
+      19,
+      51,
+      247,
+      242
+    ]
+  },
+  {
+    "role": "939",
+    "module": "Scp939AmnesticCloudAbility",
+    "member": "Cooldown",
+    "id": "939-cloud",
+    "texture": "AmnesticAbility",
+    "label": "遗忘气团",
+    "textureId": 619,
+    "crop": [
+      0,
+      0,
+      635,
+      635
+    ]
+  },
+  {
+    "role": "939",
+    "module": "Scp939ClawAbility",
+    "member": "Cooldown",
+    "id": "939-claw",
+    "texture": "939_icon_melee_attack",
+    "label": "爪击",
+    "textureId": 1438,
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ]
+  },
+  {
+    "role": "079",
+    "module": "Scp079BlackoutRoomAbility",
+    "member": "RemainingCooldown",
+    "id": "079-room",
+    "texture": "Blackout",
+    "label": "当前房间停电",
+    "textureId": 1411,
+    "crop": [
+      3,
+      3,
+      578,
+      578
+    ]
+  },
+  {
+    "role": "079",
+    "module": "Scp079BlackoutZoneAbility",
+    "member": "_cooldownTimer",
+    "id": "079-zone",
+    "texture": "Blackout",
+    "label": "区域停电",
+    "textureId": 1411,
+    "crop": [
+      3,
+      3,
+      578,
+      578
+    ]
+  },
+  {
+    "role": "939",
+    "module": "EnvironmentalMimicry",
+    "member": "Cooldown",
+    "id": "939-mimicry",
+    "texture": "EnvMimicryAbility",
+    "label": "环境拟声",
+    "textureId": 1556,
+    "crop": [
+      161,
+      141,
+      1141,
+      1122
+    ]
+  },
+  {
+    "role": "3114",
+    "module": "Scp3114Strangle",
+    "member": "Cooldown",
+    "id": "3114-strangle",
+    "texture": "Choke",
+    "label": "绞杀",
+    "textureId": 1355,
+    "crop": [
+      2,
+      1,
+      104,
+      36
+    ]
+  },
+  {
+    "role": "079",
+    "module": "Scp079LockdownRoomAbility",
+    "member": "RemainingCooldown",
+    "id": "079-lockdown",
+    "texture": "door-close",
+    "label": "封锁"
+  },
+  {
+    "role": "079",
+    "module": "Scp079TeslaAbility",
+    "member": "_nextUseTime",
+    "id": "079-tesla",
+    "texture": "tesla-use",
+    "label": "特斯拉电网"
+  }
+]

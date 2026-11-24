@@ -1,0 +1,1078 @@
+{
+  "types": [
+    "value__",
+    "None",
+    "KeycardJanitor",
+    "KeycardScientist",
+    "KeycardResearchCoordinator",
+    "KeycardZoneManager",
+    "KeycardGuard",
+    "KeycardMTFPrivate",
+    "KeycardContainmentEngineer",
+    "KeycardMTFOperative",
+    "KeycardMTFCaptain",
+    "KeycardFacilityManager",
+    "KeycardChaosInsurgency",
+    "KeycardO5",
+    "Radio",
+    "GunCOM15",
+    "Medkit",
+    "Flashlight",
+    "MicroHID",
+    "SCP500",
+    "SCP207",
+    "Ammo12gauge",
+    "GunE11SR",
+    "GunCrossvec",
+    "Ammo556x45",
+    "GunFSP9",
+    "GunLogicer",
+    "GrenadeHE",
+    "GrenadeFlash",
+    "Ammo44cal",
+    "Ammo762x39",
+    "Ammo9x19",
+    "GunCOM18",
+    "SCP018",
+    "SCP268",
+    "Adrenaline",
+    "Painkillers",
+    "Coin",
+    "ArmorLight",
+    "ArmorCombat",
+    "ArmorHeavy",
+    "GunRevolver",
+    "GunAK",
+    "GunShotgun",
+    "SCP330",
+    "SCP2176",
+    "SCP244a",
+    "SCP244b",
+    "SCP1853",
+    "ParticleDisruptor",
+    "GunCom45",
+    "SCP1576",
+    "Jailbird",
+    "AntiSCP207",
+    "GunFRMG0",
+    "GunA7",
+    "Lantern",
+    "SCP1344",
+    "Snowball",
+    "Coal",
+    "SpecialCoal",
+    "SCP1507Tape",
+    "DebugRagdollMover",
+    "SurfaceAccessPass",
+    "GunSCP127",
+    "KeycardCustomTaskForce",
+    "KeycardCustomSite02",
+    "KeycardCustomManagement",
+    "KeycardCustomMetalCase",
+    "MarshmallowItem",
+    "SCP1509",
+    "Scp021J"
+  ],
+  "textures": [
+    {
+      "id": 602,
+      "name": "IconSCP127",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 640,
+      "name": "cctv-lcz-icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 673,
+      "name": "IconCandyGray",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 687,
+      "name": "SCP1576Sprite",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 706,
+      "name": "CoinIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 709,
+      "name": "SCP1576Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 714,
+      "name": "icon-switching-3",
+      "size": [
+        1600,
+        350
+      ]
+    },
+    {
+      "id": 743,
+      "name": "VocalizeIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 753,
+      "name": "IconParticleDisruptor",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 774,
+      "name": "KeycardPermsMask",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 832,
+      "name": "Fsp9Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 841,
+      "name": "Good_Sense_Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 862,
+      "name": "IconProximityChat",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 866,
+      "name": "cctv-hcz-icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 884,
+      "name": "ShotgunIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 894,
+      "name": "Unknown_Icon",
+      "size": [
+        452,
+        452
+      ]
+    },
+    {
+      "id": 900,
+      "name": "disruptoricon_single",
+      "size": [
+        318,
+        31
+      ]
+    },
+    {
+      "id": 907,
+      "name": "Icon556x45",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 912,
+      "name": "Item_KeycardBase_Normal_3",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 922,
+      "name": "SCP207Icon 1",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 947,
+      "name": "CIIcon",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 948,
+      "name": "Scp018Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 956,
+      "name": "cctv-ez-icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 964,
+      "name": "ClassD_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 993,
+      "name": "Item_KeycardBase_Albedo",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 994,
+      "name": "Keycard_Holo",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 995,
+      "name": "SAPIcon",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 996,
+      "name": "Item_KeycardBase_Normal",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1003,
+      "name": "FlashbangIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1012,
+      "name": "1507_NTF_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1014,
+      "name": "E11SRIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1032,
+      "name": "SCP244bIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1046,
+      "name": "JailbirdIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1053,
+      "name": "icon-switching-2",
+      "size": [
+        1600,
+        350
+      ]
+    },
+    {
+      "id": 1064,
+      "name": "HegIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1071,
+      "name": "Icon12ga",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1077,
+      "name": "CoalIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1087,
+      "name": "disruptoricon_error",
+      "size": [
+        318,
+        318
+      ]
+    },
+    {
+      "id": 1094,
+      "name": "Guard_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1111,
+      "name": "939_icon_mmb",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1115,
+      "name": "049_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1117,
+      "name": "IconCandyGreen",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1140,
+      "name": "IconAK",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1171,
+      "name": "Snowball_AlbedoTransparency",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1175,
+      "name": "096_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1189,
+      "name": "1507_Alpha_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1194,
+      "name": "JailbirdIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1203,
+      "name": "IconRevolver",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1205,
+      "name": "Item_KeycardBase_Mask_2",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1223,
+      "name": "SCP1853Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1233,
+      "name": "Item_KeycardBase_Albedo_1",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1235,
+      "name": "Doctor_Call_Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1244,
+      "name": "MicroHidIcon",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 1246,
+      "name": "Marshmallow Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1252,
+      "name": "Zombie_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1278,
+      "name": "1507_Zombie_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1289,
+      "name": "Snowball",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1290,
+      "name": "939_icon_amnestic_cloud",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1297,
+      "name": "IconCom15",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1305,
+      "name": "CoinTexNormal",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1309,
+      "name": "173_Icon",
+      "size": [
+        452,
+        452
+      ]
+    },
+    {
+      "id": 1310,
+      "name": "ConfigIcon",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": 1322,
+      "name": "MedkitIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1325,
+      "name": "IconCom18",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1345,
+      "name": "FlashlightIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1369,
+      "name": "disruptoricon_burst",
+      "size": [
+        318,
+        31
+      ]
+    },
+    {
+      "id": 1379,
+      "name": "IconCandyOrange",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1386,
+      "name": "SCP207Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1389,
+      "name": "IconCandyBlue",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1417,
+      "name": "SCP500Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1421,
+      "name": "SCP268Icon",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 1434,
+      "name": "Snowball_Normal",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1438,
+      "name": "939_icon_melee_attack",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1445,
+      "name": "3114_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1447,
+      "name": "A7Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1470,
+      "name": "TapeIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1483,
+      "name": "Snowball_MaskMap",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1492,
+      "name": "Item_KeycardBase_Albedo_4",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1495,
+      "name": "Icon9x19mm",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1496,
+      "name": "IconCom45",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1507,
+      "name": "Scp2176Icon",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": 1516,
+      "name": "1509Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1536,
+      "name": "Foundation Icon 200px",
+      "size": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": 1540,
+      "name": "1507_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1557,
+      "name": "IconCandyYellow",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1566,
+      "name": "PainkillersIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1567,
+      "name": "939_Icon",
+      "size": [
+        452,
+        452
+      ]
+    },
+    {
+      "id": 1571,
+      "name": "Item_KeycardBase_Mask_5",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1574,
+      "name": "IconCandyRed",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1575,
+      "name": "Item_KeycardBase_Normal_6",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1591,
+      "name": "Scp1344Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1609,
+      "name": "Icon44cal",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1617,
+      "name": "IconCandyBrown",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1623,
+      "name": "939_icon_ultrasensitive_v2",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1627,
+      "name": "IconLogicer",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1635,
+      "name": "Waste_Not_Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1638,
+      "name": "FRMG0Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1643,
+      "name": "Scp018Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1645,
+      "name": "icon-switching-1",
+      "size": [
+        1600,
+        350
+      ]
+    },
+    {
+      "id": 1646,
+      "name": "AdrenalineIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1650,
+      "name": "Item_KeycardBase_Mask",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 1662,
+      "name": "MTF_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1664,
+      "name": "SCP021JIcon",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 1667,
+      "name": "SCP244aIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1680,
+      "name": "079_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1686,
+      "name": "Scientist_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1695,
+      "name": "IconCandyRainbow",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1701,
+      "name": "IconRadio",
+      "size": [
+        500,
+        500
+      ]
+    },
+    {
+      "id": 1702,
+      "name": "Chaos_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1707,
+      "name": "IconCandyPurple",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1709,
+      "name": "Scp330Icon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1715,
+      "name": "CoinTexHighVisibility",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1720,
+      "name": "IconCandyPink",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1731,
+      "name": "IconCandyBlack",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1736,
+      "name": "IconCandyWhite",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1747,
+      "name": "LanternIcon",
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": 1783,
+      "name": "CoinTex",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1786,
+      "name": "106_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1795,
+      "name": "1507_CI_Icon",
+      "size": [
+        417,
+        417
+      ]
+    },
+    {
+      "id": 1798,
+      "name": "939_icon_focus",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1799,
+      "name": "IconCandyEvil",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1807,
+      "name": "Icon762x39",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1814,
+      "name": "Insurgency Icon Filled 200px",
+      "size": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": 1829,
+      "name": "JackieIcon",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "id": 1834,
+      "name": "IconCrossvec",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ]
+}

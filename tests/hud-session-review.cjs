@@ -1,0 +1,18 @@
+// Real WebSocket transport and live renderer, with a simulated game/auth source.
+const {app,BrowserWindow}=require('electron'),fs=require('fs'),path=require('path'),assert=require('assert/strict'),{spawn}=require('child_process'),readline=require('readline');
+const WS=require('../desktop/node_modules/ws'),root=path.resolve(__dirname,'..'),out=path.join(root,'output/hud-session-review');fs.mkdirSync(out,{recursive:true});
+let sim,client,w;const pending=new Map(),checks=[];let next=0,token='',states=0;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));async function until(fn){for(let i=0;i<150;i++){if(await fn())return;await sleep(30);}throw Error('Timed out');}
+function command(op,extra={}){return new Promise(resolve=>{const id=++next;pending.set(id,resolve);sim.stdin.write(JSON.stringify({id,op,...extra})+'\n');});}
+app.whenReady().then(async()=>{
+ w=new BrowserWindow({show:false,width:1920,height:1080,useContentSize:true,webPreferences:{offscreen:true,backgroundThrottling:false}});await w.loadFile(path.join(root,'ui/index.html'),{query:{live:'1'}});const run=s=>w.webContents.executeJavaScript(s);await run('uiReady()');
+ let address;sim=spawn(path.join(root,'output/e2e/SimServer.exe'),[path.join(root,'output/e2e/fixture.json')],{windowsHide:true,stdio:['pipe','pipe','pipe']});readline.createInterface({input:sim.stdout}).on('line',l=>{const j=JSON.parse(l);if(j.ready)address=j.url;else{pending.get(j.reply)?.(j);pending.delete(j.reply);}});await until(()=>address);
+ async function connect(credential){client=new WS(address);client.on('open',()=>client.send(JSON.stringify(credential)));client.on('message',async buf=>{const s=JSON.parse(buf);if(s.type==='authenticated')token=s.token;if(['state','layout'].includes(s.type)){await run('MZLive.accept('+JSON.stringify(s)+')');if(s.type==='state')states++;}});await until(()=>client.readyState===WS.OPEN);}
+ const code=(await command('pair')).code;assert.match(code,/^\d{4}$/);await connect({code});await until(()=>token);await command('start');await until(async()=>!(await run("document.getElementById('stage').hidden")));checks.push('Four digit pairing over WebSocket shows live renderer');
+ const uses=(await command('stats')).codeUses;await command('leave-ow');const before=states;await until(()=>states>before+3);assert.equal(await run("document.getElementById('stage').hidden"),false);checks.push('Simulated role change preserves connection and HUD');
+ await command('visibility',{value:false});await until(async()=>await run("document.getElementById('stage').hidden"));const hiddenStates=states;await until(()=>states>hiddenStates+3);assert.equal(client.readyState,WS.OPEN);checks.push('V-hidden state keeps telemetry and session alive');
+ client.close();await until(()=>client.readyState===WS.CLOSED);const oldToken=token;token='';await connect({token:oldToken});await until(()=>token);assert.equal(await run("document.getElementById('stage').hidden"),true);checks.push('Token reconnect outside OW preserves hidden state');
+ await command('visibility',{value:true});await until(async()=>!(await run("document.getElementById('stage').hidden")));assert.equal((await command('stats')).codeUses,uses);checks.push('Showing HUD again consumes no new pair code');
+ assert.equal(await run('MZKillfeed.count'),0);checks.push('Live stream has no preview killfeed');
+ client.close();await command('quit');fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({passed:true,kind:'simulated game/auth, production transport and live renderer',checks,notTested:'Real game Server-Specific key delivery and role transitions'},null,2));w.destroy();app.quit();
+}).catch(e=>{fs.writeFileSync(path.join(out,'error.txt'),e.stack);client?.close();sim?.kill();app.exit(1)});

@@ -1,0 +1,10 @@
+{
+  "name": "mz-observer-overlay",
+  "version": "0.1.10-preview.14",
+  "private": true,
+  "main": "main.cjs",
+  "description": "MZ server-backed spectator overlay",
+  "dependencies": {
+    "ws": "8.23.0"
+  }
+}

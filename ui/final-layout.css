@@ -1,0 +1,111 @@
+/* One portrait baseline and a reserved right-hand number column. */
+.card .portrait,.card.scp .portrait{width:82px;height:126px;left:0;bottom:0;mask-image:linear-gradient(to right,#000 0%,#000 75%,transparent 91%)}
+.portrait[data-art="MTF_ProfileImage"] img{width:356px;left:-132px;top:-27px;clip-path:none;mask-image:url('../assets/ui/mtf-bust-mask.svg');mask-size:100% 100%;mask-repeat:no-repeat}
+.portrait[data-art="scp_939_v2"] img{width:225px;left:-52px;top:-1px;transform-origin:97px 102px;transform:scaleX(-1) rotate(-35deg)}
+.portrait[data-art="3114_Icon"] img{width:190px;left:-57px;top:1px;transform-origin:96px 96px;transform:rotate(38deg)}
+.card[data-role="079"] .portrait{width:86px}
+.card[data-role="079"] .portrait img{width:125px;left:-6px;top:-32px}
+.portrait[data-art="1507_Icon"] img{width:145px;left:-31px;top:-10px}
+.numbers{right:5px;width:69px}
+.card.scp .numbers .hp{font-size:27px;letter-spacing:-.5px}
+.secondary-values,.card.scp .secondary-values{right:0;bottom:46px;width:46px;height:42px;display:grid;grid-template-columns:46px;grid-template-rows:18px 18px;row-gap:6px;column-gap:0}
+.secondary-values .ahp-number{grid-row:1;grid-column:1;font-size:15px;line-height:18px;justify-self:end}
+.secondary-values .hs,.card.scp .secondary-values .hs{grid-row:2;grid-column:1;font-size:17px;line-height:18px;justify-self:end}
+.card[data-role="079"] .secondary-values .hs{color:#00affd}
+.card[data-role="079"] .secondary-values .ahp-number{color:#eef4ff;font-size:13px}
+.card[data-role="079"] .hp{font-size:27px}
+.portrait[data-art="1507_ProfileImage 1"] img{width:170px;left:-70px;top:-12px;clip-path:none;mask-image:url('../assets/ui/1507-bust-mask.svg');mask-size:100% 100%;mask-repeat:no-repeat}
+
+/* Native 939 bust: head and chest, no body rotation or inherited full-body polygon. */
+.portrait[data-art="939_Icon"]{width:90px;height:126px;mask-image:linear-gradient(to right,#000 0 80%,transparent 99%)}
+.portrait[data-art="939_Icon"] img{width:118px;left:-13px;top:8px;clip-path:none;transform:scaleX(-1);transform-origin:center;filter:url(#portrait-alpha-clean)}
+.card.flashed .portrait[data-art="939_Icon"] img{filter:url(#portrait-alpha-clean) brightness(0) invert(1)}
+.card[data-role="079"] .generators{position:absolute;left:6px;top:8px;font-weight:800;font-size:17px;line-height:20px;text-shadow:0 1px 3px #000}
+.card[data-role="079"].dead .generators{visibility:hidden}
+.card[data-role="079"] .secondary-values{bottom:62px}
+.card[data-role="079"] .equipment{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:2px 6px}
+.xp-readout{font-size:10px;line-height:11px;color:white;font-variant-numeric:tabular-nums}
+.xp-track{height:5px;width:100%;background:#ffffff25;overflow:hidden}.xp-track i{display:block;height:100%;background:white;transition:width .2s ease-out}
+
+/* Latest review: subdued AHP, fixed side-by-side extra stats, readable 079 telemetry. */
+.ahp-fill{background:#8dce64}.ahp-number{color:#a9dd8a}
+.secondary-values,.card.scp .secondary-values{width:70px;height:20px;bottom:46px;grid-template-columns:32px 32px;grid-template-rows:20px;column-gap:6px;row-gap:0;align-items:center}
+.secondary-values .ahp-number{grid-row:1;grid-column:1;font-size:16px;line-height:20px}
+.secondary-values .hs,.card.scp .secondary-values .hs{grid-row:1;grid-column:2;font-size:16px;line-height:20px}
+.status-badge{display:inline-flex;align-items:center;gap:2px;height:25px}.status-count{font-size:12px;line-height:16px;font-weight:700;color:#fff;text-shadow:0 1px 3px #000;white-space:nowrap}
+.card[data-role="079"] .portrait{width:84px;mask-image:linear-gradient(to right,#000 0 93%,transparent 100%)}
+.card[data-role="079"] .portrait img{width:130px;left:-24px;top:-46px}
+.card[data-role="079"] .generators{font-size:21px;line-height:24px;top:7px}
+.card[data-role="079"] .secondary-values{bottom:83px;height:24px;grid-template-columns:70px;grid-template-rows:24px}
+.card[data-role="079"] .secondary-values .ahp-number{grid-column:1;grid-row:1;font-size:20px;line-height:24px}
+.card[data-role="079"] .xp-readout{position:absolute;right:0;top:36px;font-size:12px;line-height:15px;font-weight:700;white-space:nowrap;color:#fff;text-align:right}
+.card[data-role="079"] .xp-track{height:10px}
+
+#radar{width:472.5px;height:437.5px}
+#score{left:calc(50% - 210px)}
+#controls{max-width:calc(100vw - 24px);flex-wrap:wrap}
+.card.invisible:not(.dead) .portrait{opacity:.5}
+.marker{width:22px;height:22px;border-width:1.5px;box-shadow:0 1px 2px #0009}
+.marker span{font-size:12px}
+.marker::before{width:7px;height:10px;left:21px;top:6px;transform-origin:-10px 5px}
+#map-world,.marker,.elevator-label,.room-landmark{transition:transform .22s linear}
+.room-landmark{position:absolute;left:0;top:0;display:flex;align-items:center;gap:2px;height:16px;color:#fff;font:600 10px/16px Arial,'Microsoft YaHei',sans-serif;white-space:nowrap;text-shadow:0 1px 2px #000,0 0 3px #000;pointer-events:none}
+.room-landmark svg{width:12px;height:12px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.6}
+#radar.floor-reset .room-landmark{transition:none}
+
+#elevators [hidden]{display:none!important}
+
+.marker span{font-size:var(--map-number-font,12px)}
+
+.card .name-row{transition:background-color .15s ease-out,color .15s ease-out}
+.card[data-observed="true"] .name-row{background:#25cf5a;color:#072b13}
+.card[data-observed="true"] .name{text-shadow:none}
+
+/* Compact overlay: shrink content together, preserving card/effect alignment. */
+#radar{left:4px;top:4px;transform:scale(.9);transform-origin:top left}
+#humans{transform:scale(.9);transform-origin:bottom left}
+#scps{transform:scale(.9);transform-origin:bottom right}
+
+/* SCP-079 is a camera rather than a moving SCP dot. Number stays upright. */
+.marker.camera-marker{background:transparent;border:0;border-radius:0;box-shadow:none;transition:none}
+.marker.camera-marker::before{display:none}
+.marker.camera-marker .camera-glyph{position:absolute;left:-5px;top:-4px;width:36px;height:32px;overflow:visible;fill:var(--color);stroke:#fff9;stroke-width:1;stroke-linejoin:round;transform-origin:16px 15px;transform:none;filter:drop-shadow(0 1px 2px #000b)}
+.marker.camera-marker span{z-index:1;line-height:22px}
+
+.shortcut-number{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;margin-right:4px;border:1px solid #8fa6bb;border-radius:3px;background:#152331;color:#fff;font:bold 13px Arial}.shortcut-number[hidden]{display:none}.card.dead .shortcut-number{opacity:.35}
+
+/* Fixed physical hotkey slots: labels never travel with the 300 ms card animation. */
+.card .shortcut-number{visibility:hidden}.card .name-row{justify-content:flex-start}.card .name{min-width:0;flex:1}
+.position-shortcuts{position:absolute;bottom:24px;display:flex;gap:6px;align-items:flex-end;pointer-events:none;z-index:20;transform:scale(.9)}
+.position-shortcuts.humans{left:28px;transform-origin:bottom left}.position-shortcuts.scps{right:28px;transform-origin:bottom right}
+.position-slot{position:relative;flex:none}.position-number{position:absolute;left:6px;display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border:1px solid #8fa6bb;border-radius:3px;background:#152331;color:white;font:bold 13px Arial}
+
+/* Position markers on the same interpolated map matrix, including rotation. */
+.marker,.elevator-label,.room-landmark{transition:none}
+.card.dark-room:not(.flashed) .portrait img{filter:brightness(0)}
+.shot-indicator{position:absolute;right:7px;top:7px;width:16px;height:16px;color:#e7b36b;opacity:0;pointer-events:none;z-index:6}
+.shot-indicator svg{width:100%;height:100%;fill:currentColor}
+
+.shot-indicator{right:auto;width:10px;height:8px;transform:translateY(-50%) rotate(var(--muzzle-angle,0deg));transform-origin:0 50%;color:#efb970;z-index:6}
+.signal-static{position:absolute;left:0;top:0;z-index:12;pointer-events:none;image-rendering:pixelated}
+
+.shot-indicator{line-height:0}.shot-indicator svg{display:block}
+/* Real skill cooldowns sit between status badges and the 90px card body. */
+.ability-cooldowns{position:absolute;top:26px;left:0;right:0;height:22px;display:flex;gap:3px;z-index:8;pointer-events:auto}
+.ability-cooldowns[hidden]{display:none}
+.ability-cooldown{display:flex;align-items:center;justify-content:center;gap:2px;min-width:0;flex:0 1 44px;height:22px;padding:1px 2px;background:transparent;border-radius:2px}
+.ability-cooldown img{width:19px;height:19px;object-fit:contain}.ability-cooldown b{font:700 11px Arial;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px #000}
+
+.effects .status-item{filter:drop-shadow(0 1px 2px #000);opacity:1}
+.card .visual::before{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;z-index:4;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20140%2090%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d5faff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M0%208L14%2016L20%2030M7%2012L8%2024M14%2016L25%2014M20%2030L29%2034M3%2056L16%2064L23%2082M12%2062L25%2059M18%2070L11%2079M140%206L124%2018L117%2036M132%2012L121%2010M124%2018L131%2028M119%2030L109%2027M140%2065L126%2070L115%2088M128%2069L119%2061M122%2078L132%2084M45%200L49%2013L58%2022M48%2010L39%2015M51%2016L62%2013M83%2090L88%2075L99%2069M88%2076L79%2070M91%2073L92%2063%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23caf7ff%22%20opacity%3D%22.65%22%3E%3Cpath%20d%3D%22M0%200H23L12%207L19%2012L5%2010L0%2026ZM140%200H124L131%209L121%2016L137%2011L140%2031ZM0%2090V70L10%2080L17%2078L12%2089ZM140%2090V71L129%2081L116%2090Z%22/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(90deg,#b7ecff65,transparent 30% 70%,#b7ecff65);background-size:100% 100%;box-shadow:inset 0 0 15px #c9f4ffa0;opacity:0;transition:opacity .65s ease-in-out}
+.card.frost:not(.dead) .visual::before{opacity:1}
+.card.dead .visual::before{opacity:0;transition:none}
+@media(prefers-reduced-motion:reduce){.card .visual::before{transition:none}}
+
+/* SCP footer: one row of cooldowns, no overflow indicator or partial icons. */
+.card .ability-cooldowns{bottom:auto;height:25px;display:flex;gap:4px;align-items:center;overflow:hidden;background:transparent}
+.card .ability-cooldowns[hidden],.ability-cooldown[hidden]{display:none}
+.ability-cooldown{height:25px;padding:0;gap:2px;flex:0 0 auto;min-width:0;justify-content:flex-start;background:transparent}
+.ability-cooldown img{width:23px;height:23px;flex-shrink:0}.ability-cooldown b{font-size:13px;white-space:nowrap}
+.vigor-readout{position:absolute;right:5px;bottom:8px;display:flex;align-items:center;gap:4px;color:#00affd;font:bold 14px Arial;z-index:5;text-shadow:0 1px 2px #000}
+.vigor-readout img{width:12px;height:15px;object-fit:contain}
